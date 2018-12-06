@@ -8,6 +8,8 @@ public class App {
 		
 		int id;
 		String name;
+		int author;
+		int editor;
 		
 		Scanner sc = new Scanner(System.in);
 
@@ -28,7 +30,7 @@ public class App {
 				System.out.println("Enter new book name");
 				name = sc.nextLine();
 				try {
-					
+					DAOLivre.updateBook(id, name);
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
 				}
@@ -45,9 +47,14 @@ public class App {
 			}
 			if(choice == 4) {
 				System.out.println("Register new book");
+				System.out.println("Please enter book name");
 				name = sc.nextLine();
+				System.out.println("Please enter author id");
+				author = Integer.parseInt(sc.nextLine());
+				System.out.println("Please enter editor id");
+				editor = Integer.parseInt(sc.nextLine());
 				try {
-					
+					DAOLivre.insertBook(name, author, editor);
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
 				}
@@ -65,7 +72,7 @@ public class App {
 				+ "-1-list all books \r\n"
     			+ "-2-update a book \r\n"
     			+ "-3-delete a book \r\n"
-    			+ "-4-create a category \r\n"
+    			+ "-4-create a book \r\n"
     			+ "-5-Exit");
 	}
 

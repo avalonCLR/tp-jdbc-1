@@ -33,9 +33,13 @@ public class DAOLivre {
 			System.out.println();
 
 			while (rs.next()) {
-				System.out.println("\t" + rs.getInt("id") + "\t\t" + rs.getString("titre") + "\t\t"
-						+ rs.getString("genre") + "\t\t" + rs.getString("categorie") + "\t\t" + rs.getInt("id_auteur")
-						+ "\t\t" + rs.getInt("id_editeur") + "\t\t" + rs.getInt("id_genre") + "\t\t"
+				System.out.println("\t" + rs.getInt("id") + "\t\t" 
+						+ rs.getString("titre") + "\t\t"
+						+ rs.getString("genre") + "\t\t" 
+						+ rs.getString("categorie") + "\t\t" 
+						+ rs.getInt("id_auteur") + "\t\t" 
+						+ rs.getInt("id_editeur") + "\t\t" 
+						+ rs.getInt("id_genre") + "\t\t"
 						+ rs.getInt("id_categorie") + "\r\n");
 			}
 
@@ -80,7 +84,7 @@ public class DAOLivre {
 
 	}
 
-	public static void insertBook(String titre) throws Exception{
+	public static void insertBook(String titre, int auteur, int editeur) throws Exception{
 		
 		Connection co = null;
 		PreparedStatement pstatement = null;
@@ -88,8 +92,10 @@ public class DAOLivre {
 		try {
 			co = ConnectionLivre.getConnection();
 			
-			pstatement = co.prepareStatement("INSERT INTO livre (titre) values (?)");
+			pstatement = co.prepareStatement("INSERT INTO livre (titre, id_auteur, id_editeur) values (?,?,?) ");
 			pstatement.setString(1, titre);
+			pstatement.setInt(2, auteur);
+			pstatement.setInt(3, editeur);
 			
 			int result = pstatement.executeUpdate();
 			if(result == 0) {
